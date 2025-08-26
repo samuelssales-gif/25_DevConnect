@@ -1,0 +1,107 @@
+/* Layout principal */
+main {
+    width: 100%;
+    min-height: 100vh;
+    /* altura da tela inteira */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #CBD3D7;
+    /* Fundo principal claro */
+}
+
+main>div {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Formulário */
+#formulario {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3%;
+    gap: 10px;
+    background-color: #E4E4E4;
+    /* Fundo mais claro para contraste */
+    border-radius: 8px;
+}
+
+#secao-cadastro {
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.estilo-formulario {
+    border: var(--borda);
+    width: 100%;
+    max-width: 340px;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+#formulario>div {
+    width: 100%;
+}
+
+#formulario>div>label {
+    font-size: var(--tamanho-fonte-sm);
+    color: #C6C5B9;
+    /* Texto suave */
+    font-weight: 500;
+    padding-bottom: 4px;
+}
+
+.formulario-botao-azul {
+    width: 100%;
+    background-color: #62929E;
+    /* Botão azul destacado */
+    color: white;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.formulario-botao-azul:hover {
+    background-color: #546A7B;
+}
+
+#formulario>p {
+    text-transform: uppercase;
+    font-size: var(--tamanho-fonte-sm);
+    color: #C6C5B9;
+}
+
+#formulario>a,
+#secao-cadastro>p>a {
+    text-decoration: none;
+    color: #546A7B;
+    font-weight: 500;
+}
+
+.informacao-aplicativo {
+    font-size: var(--tamanho-fonte-sm);
+    color: #546A7B;
+    font-weight: 400;
+}
+
+/* Seção de instalação (botões de download) */
+#secao-instalacao {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#secao-instalacao img {
+    width: 133px;
+    height: 39px;
+}

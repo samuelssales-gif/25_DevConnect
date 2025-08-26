@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap');
+
+:root {
+    --cor-cinza: #CBD3D7;
+    --cor-branco: #E4E4E4;
+    --cor-marron-claro: #C6C5B9;
+    --cor-verde: #62929E;
+    --cor-cinza-escuro: #546A7B;
+
+    --borda: 1px solid var(--cor-cinza);
+    --borda-arredondamento: 2px;
+
+    --tamanho-fonte-lg: 20px;
+    --tamanho-fonte-md: 16px;
+    --tamanho-fonte-sm: 14px;
+}
+
+/* seletor global */
+* {
+    /* font-family: "Gravitas One", serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* o valor total do tamanho do elemento conta tanto com espaços internos /externos e bordas */
+}
+
+body {
+    background-color: var(--cor-cinza);
+    font-size: var(--tamanho-fonte-sm);
+    /* font-size geral reduzido */
+}
+
+h1 {
+    position: absolute;
+    /* camadas do elemento */
+    z-index: -1;
+    opacity: 0;
+}
+
+/* formulário */
+input {
+    width: 100%;
+    height: 35px;
+    border: var(--borda);
+    background-color: var(--cor-cinza);
+    font-size: var(--tamanho-fonte-sm);
+}
+
+.formulario-botao-azul {
+    background-color: var(--cor-verde);
+    border-radius: var(--borda-arredondamento);
+    border: nome;
+    height: 35px;
+
+    color: var(--cor-branco);
+
+
+
+}
