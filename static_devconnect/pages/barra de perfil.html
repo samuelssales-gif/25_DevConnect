@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DevConect - Estilo Instagram com Stories</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fafafa;
+      color: #262626;
+      min-height: 100vh;
+      padding-top: 64px; /* espaço para navbar fixa */
+      display: flex;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      user-select: none;
+    }
+
+    /* Navbar fixa */
+    header {
+      position: fixed;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100%; max-width: 935px;
+      height: 64px;
+      background: #fff;
+      border-bottom: 1px solid #dbdbdb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 1000;
+    }
+    header .logo {
+      font-weight: 700;
+      font-size: 1.9rem;
+      letter-spacing: 3px;
+      color: #262626;
+      user-select: none;
+      cursor: default;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+    header .logo:hover {
+      color: #0095f6;
+    }
+    header nav {
+      display: flex;
+      gap: 28px;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #262626;
+    }
+    header nav span {
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    header nav span:hover {
+      color: #0095f6;
+    }
+
+    /* Container principal */
+    .container {
+      max-width: 935px;
+      width: 100%;
+      display: flex;
+      gap: 32px;
+      padding: 20px 20px 80px;
+    }
+
+    /* Sidebar perfil e menu */
+    aside.sidebar {
+      flex: 0 0 280px;
+      background: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 14px;
+      padding: 30px 24px;
+      height: fit-content;
+      position: sticky;
+      top: 80px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      user-select: none;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+    .profile img {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #0095f6;
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .profile img:hover {
+      transform: scale(1.1);
+      border-color: #005f99;
+    }
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
+    }
+    .profile-info .username {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #262626;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      user-select: text;
+    }
+    .profile-info .username:hover {
+      color: #0095f6;
+    }
+    .profile-info .fullname {
+      font-size: 1rem;
+      color: #8e8e8e;
+      margin-top: 6px;
+      user-select: text;
+    }
+    aside.sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    aside.sidebar nav a {
+      color: #262626;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding-left: 8px;
+      border-left: 3px solid transparent;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    aside.sidebar nav a:hover,
+    aside.sidebar nav a.active {
+      color: #0095f6;
+      border-left-color: #0095f6;
+      font-weight: 700;
+    }
+
+    /* Feed principal */
+    main.feed {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    /* Stories no topo do feed */
+    .stories {
+      display: flex;
+      gap: 16px;
+      background: #fff;
+      padding: 16px 12px;
+      border: 1px solid #dbdbdb;
+      border-radius: 16px;
+      overflow-x: auto;
+      user-select: none;
+      scrollbar-width: none; /* Firefox */
+    }
+    .stories::-webkit-scrollbar {
+      display: none; /* Chrome, Safari e Opera */
+    }
+
+    .story {
+      flex: 0 0 auto;
+      width: 84px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .story img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 3px solid #dbdbdb;
+      object-fit: cover;
+      transition: border-color 0.3s ease;
+    }
+    .story img.hasStory {
+      border-color: #ff004f; /* cor do story ativo */
+      box-shadow: 0 0 8px #ff004f;
+    }
+    .story img:hover {
+      transform: scale(1.1);
+    }
+    .story .username {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: #262626;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      user-select: text;
+    }
+
+    /* Post */
+    article.post {
+      background: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+      transition: box-shadow 0.25s ease;
+      user-select: text;
+    }
+    article.post:hover {
+      box-shadow: 0 10px 35px rgba(0,0,0,0.13);
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 24px;
+    }
+    .post-header img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #dbdbdb;
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .post-header img:hover {
+      transform: scale(1.1);
+      border-color: #0095f6;
+    }
+    .post-header .username {
+      font-weight: 700;
+      font-size: 1.15rem;
+      cursor: pointer;
+      color: #262626;
+      transition: color 0.3s ease;
+      user-select: text;
+    }
+    .post-header .username:hover {
+      color: #0095f6;
+    }
+
+    .post-image {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      background: #efefef;
+      display: block;
+      border-top: 1px solid #dbdbdb;
+      border-bottom: 1px solid #dbdbdb;
+      transition: filter 0.3s ease;
+      user-select: none;
+    }
+    .post-image:hover {
+      filter: brightness(0.95);
+      cursor: pointer;
+    }
+
+    .post-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 14px 24px;
+      font-size: 1.7rem;
+      color: #262626;
+      user-select: none;
+    }
+    .post-actions button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      font-size: 1.7rem;
+      color: #262626;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      user-select: none;
+    }
+    .post-actions button:hover {
+      color: #ed4956;
+    }
+
+    .post-description {
+      padding: 0 24px 20px;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #262626;
+      user-select: text;
+    }
+    .post-description strong {
+      margin-right: 8px;
+      cursor: pointer;
+      color: #262626;
+      transition: color 0.3s ease;
+      user-select: text;
+    }
+    .post-description strong:hover {
+      color: #0095f6;
+    }
+
+    /* Sugestões */
+    aside.suggestions {
+      flex: 0 0 280px;
+      background: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 14px;
+      padding: 24px 24px 18px;
+      height: fit-content;
+      position: sticky;
+      top: 80px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      color: #262626;
+      user-select: none;
+    }
+    aside.suggestions h4 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      color: #8e8e8e;
+    }
+    .suggestion-user {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 14px;
+    }
+    .suggestion-user img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #dbdbdb;
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .suggestion-user img:hover {
+      transform: scale(1.15);
+      border-color: #0095f6;
+    }
+    .suggestion-info {
+      flex-grow: 1;
+      margin-left: 14px;
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      user-select: text;
+    }
+    .suggestion-info .username {
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .suggestion-info .username:hover {
+      color: #0095f6;
+    }
+    .suggestion-info .reason {
+      color: #8e8e8e;
+      font-size: 0.85rem;
+      margin-top: 2px;
+    }
+    .follow-btn {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #0095f6;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .follow-btn:hover {
+      background-color: #e6f0fa;
+    }
+
+    /* Modal Stories */
+    .modal-story {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1500;
+    }
+    .modal-story.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #000;
+      max-width: 420px;
+      max-height: 750px;
+      width: 90vw;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(255,255,255,0.2);
+    }
+    .modal-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      padding: 4px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      line-height: 1;
+    }
+    .modal-close:hover {
+      background-color: rgba(255,0,79,0.8);
+    }
+
+    /* Responsividade */
+    @media (max-width: 1000px) {
+      .container {
+        max-width: 100%;
+        padding: 20px 16px 80px;
+        gap: 24px;
+      }
+      aside.sidebar,
+      aside.suggestions {
+        display: none;
+      }
+      main.feed {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo" aria-label="DevConect">DevConect</div>
+    <nav role="navigation" aria-label="Menu principal">
+      <span tabindex="0">Página Inicial</span>
+      <span tabindex="0">Sobre</span>
+      <span tabindex="0">Contato</span>
+    </nav>
+  </header>
+
+  <div class="container" role="main">
+
+    <aside class="sidebar" aria-label="Perfil e menu lateral">
+      <div class="profile">
+        <img src="https://i.pravatar.cc/72?img=5" alt="Foto do usuário" />
+        <div class="profile-info">
+          <div class="username" tabindex="0">devconect</div>
+          <div class="fullname">DevConect Brasil</div>
+        </div>
+      </div>
+      <nav aria-label="Menu do usuário">
+        <a href="#" class="active" tabindex="0">Feed</a>
+        <a href="#" tabindex="0">Explorar</a>
+        <a href="#" tabindex="0">Notificações</a>
+        <a href="#" tabindex="0">Mensagens</a>
+        <a href="#" tabindex="0">Configurações</a>
+      </nav>
+    </aside>
+
+    <main class="feed" aria-label="Feed de posts e stories">
+      <!-- Stories -->
+      <section class="stories" aria-label="Stories dos usuários">
+        <div class="story" tabindex="0" role="button" aria-pressed="false" data-story="https://source.unsplash.com/featured/?code,1">
+          <img src="https://i.pravatar.cc/72?img=12" alt="Story de user1" class="hasStory" />
+          <div class="username">user1</div>
+        </div>
+        <div class="story" tabindex="0" role="button" aria-pressed="false" data-story="https://source.unsplash.com/featured/?programming,2">
+          <img src="https://i.pravatar.cc/72?img=23" alt="Story de user2" class="hasStory" />
+          <div class="username">user2</div>
+        </div>
+        <div class="story" tabindex="0" role="button" aria-pressed="false" data-story="https://source.unsplash.com/featured/?technology,3">
+          <img src="https://i.pravatar.cc/72?img=34" alt="Story de user3" class="hasStory" />
+          <div class="username">user3</div>
+        </div>
+        <div class="story" tabindex="0" role="button" aria-pressed="false" data-story="https://source.unsplash.com/featured/?developer,4">
+          <img src="https://i.pravatar.cc/72?img=45" alt="Story de user4" class="hasStory" />
+          <div class="username">user4</div>
+        </div>
+        <div class="story" tabindex="0" role="button" aria-pressed="false" data-story="https://source.unsplash.com/featured/?computer,5">
+          <img src="https://i.pravatar.cc/72?img=56" alt="Story de user5" class="hasStory" />
+          <div class="username">user5</div>
+        </div>
+      </section>
+
+      <!-- Feed de posts -->
+      <article class="post" tabindex="0" aria-label="Post do usuário devconect">
+        <header class="post-header">
+          <img src="https://i.pravatar.cc/52?img=5" alt="Foto do usuário devconect" />
+          <div class="username" tabindex="0">devconect</div>
+        </header>
+        <img src="https://source.unsplash.com/935x520/?technology,coding" alt="Imagem do post" class="post-image" />
+        <div class="post-actions" aria-label="Ações do post">
+          <button aria-label="Curtir post">❤️ Curtir</button>
+          <button aria-label="Comentar no post">💬 Comentar</button>
+          <button aria-label="Compartilhar post">🔗 Compartilhar</button>
+        </div>
+        <p class="post-description"><strong>devconect</strong> Um post incrível feito especialmente para você!</p>
+      </article>
+
+      <article class="post" tabindex="0" aria-label="Post do usuário codeguru">
+        <header class="post-header">
+          <img src="https://i.pravatar.cc/52?img=23" alt="Foto do usuário codeguru" />
+          <div class="username" tabindex="0">codeguru</div>
+        </header>
+        <img src="https://source.unsplash.com/935x520/?programming,code" alt="Imagem do post" class="post-image" />
+        <div class="post-actions" aria-label="Ações do post">
+          <button aria-label="Curtir post">❤️ Curtir</button>
+          <button aria-label="Comentar no post">💬 Comentar</button>
+          <button aria-label="Compartilhar post">🔗 Compartilhar</button>
+        </div>
+        <p class="post-description"><strong>codeguru</strong> Confira esse código que está revolucionando o mundo!</p>
+      </article>
+    </main>
+
+    <aside class="suggestions" aria-label="Sugestões de usuários para seguir">
+      <h4>Sugestões para você</h4>
+      <div class="suggestion-user">
+        <img src="https://i.pravatar.cc/38?img=18" alt="Foto do usuário devmaster" />
+        <div class="suggestion-info">
+          <div class="username" tabindex="0">devmaster</div>
+          <div class="reason">Segue você</div>
+        </div>
+        <button class="follow-btn" aria-label="Seguir devmaster">Seguir</button>
+      </div>
+      <div class="suggestion-user">
+        <img src="https://i.pravatar.cc/38?img=25" alt="Foto do usuário coderslife" />
+        <div class="suggestion-info">
+          <div class="username" tabindex="0">coderslife</div>
+          <div class="reason">Novo no DevConect</div>
+        </div>
+        <button class="follow-btn" aria-label="Seguir coderslife">Seguir</button>
+      </div>
+      <div class="suggestion-user">
+        <img src="https://i.pravatar.cc/38?img=30" alt="Foto do usuário devwizard" />
+        <div class="suggestion-info">
+          <div class="username" tabindex="0">devwizard</div>
+          <div class="reason">Segue você</div>
+        </div>
+        <button class="follow-btn" aria-label="Seguir devwizard">Seguir</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Modal de Story -->
+  <div class="modal-story" role="dialog" aria-modal="true" aria-label="Visualizador de Story">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Fechar Story">&times;</button>
+      <img src="" alt="Story em destaque" id="modalStoryImage" />
+    </div>
+  </div>
+
+  <script>
+    // Seleciona elementos
+    const stories = document.querySelectorAll('.story');
+    const modal = document.querySelector('.modal-story');
+    const modalImg = document.getElementById('modalStoryImage');
+    const closeBtn = document.querySelector('.modal-close');
+
+    // Abre o modal com a imagem do story
+    stories.forEach(story => {
+      story.addEventListener('click', () => {
+        const imgSrc = story.getAttribute('data-story');
+        modalImg.src = imgSrc;
+        modal.classList.add('active');
+        story.setAttribute('aria-pressed', 'true');
+      });
+      story.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          story.click();
+        }
+      });
+    });
+
+    // Fecha o modal
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      stories.forEach(story => story.setAttribute('aria-pressed', 'false'));
+      modalImg.src = '';
+    });
+
+    // Fecha modal ao clicar fora da imagem
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeBtn.click();
+      }
+    });
+
+    // Fecha modal ao apertar Esc
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeBtn.click();
+      }
+    });
+  </script>
+</body> 
+</html>

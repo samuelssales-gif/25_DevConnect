@@ -4,65 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Samuel sousa sales">
-    <meta name="description" content="Site da empresa DevConnect">
+    <meta name="author" content="Samuel Sousa Sales">
+    <meta name="description" content="Tela de cadastro da empresa DevConnect">
 
-    <title>Tela login - DevConnect </title>
+    <title>Cadastro - DevConnect</title>
 
-    <link rel="shortcut icon" href="../images/logo-devconnect- 1.svg" type="image/x-icon">
-    <!--CSS-->
-    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="shortcut icon" href="../images/DevConnect.svg" type="image/x-icon">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/cadastro.css">
 </head>
 
 <body>
-    <h1>Tela principal login</h1>
+    <h1 class="visually-hidden">Tela de Cadastro - DevConnect</h1>
+
     <main>
         <div>
-            <!--formulário-->
-            <form id="formulario" class="estilo-formulario">
-                <img src="../images/DevConnect 2.svg" alt="Logo da DevConnect">
+            <!-- Formulário de Cadastro -->
+            <form id="formulario" class="estilo-formulario" autocomplete="on">
+                <img src="../images/DevConnect.svg" alt="Logotipo DevConnect" style="width: 100%;">
 
                 <div>
-                    <label for="usuario">Nome e Sobrenome:</label>
-                    <input type="text" name="" id="">
+                    <label for="nome">Nome e Sobrenome:</label>
+                    <input type="text" name="nome" id="nome" required>
                 </div>
 
                 <div>
-                    <label for="usuario">Nome do usuario :</label>
-                    <input type="text" name="" id="">
+                    <label for="usuario">Nome de Usuário:</label>
+                    <input type="text" name="usuario" id="usuario" required>
                 </div>
 
                 <div>
-                    <label for="usuario">E-mail</label>
-                    <input type="email" name="" id="">
+                    <label for="email">E-mail:</label>
+                    <input type="email" name="email" id="email" required>
                 </div>
 
                 <div>
-                    <label for="usuario">Senha</label>
-                    <input type="password" name="" id="">
+                    <label for="senha">Senha:</label>
+                    <input type="password" name="senha" id="senha" required>
                 </div>
 
                 <div>
                     <label for="file" class="btn-upload">Fazer upload da imagem</label>
-                    <input type="file" id="file" hidden>
+                    <input type="file" name="imagem" id="file" accept="image/*" hidden>
                 </div>
 
-                <button type="submit" class="formulario-botao-azul">Entrar</button>
-
-
-
+                <button type="submit" class="formulario-botao-azul">Cadastrar</button>
             </form>
 
-            <!--seção de cadastro-->
-
-
-            <p class="informacao-aplicativo">Obtenha o aplicativo.</p>
-
-            <!--Seção de instalação-->
-            <section id="secao-instalacao">
-                <img src="../images/app-store.svg" alt="Imagem informando para baixar no App Store">
-                <img src="../images/google-play.svg" alt="Imagem informando para baixar no Google Play">
+            <!-- Seção de Redirecionamento -->
+            <section id="secao-cadastro" class="estilo-formulario">
+                <p>Já possui uma conta? <a href="../pages/index.html">Conectar-se</a></p>
             </section>
         </div>
     </main>
