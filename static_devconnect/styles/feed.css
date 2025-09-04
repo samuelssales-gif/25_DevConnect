@@ -7,15 +7,12 @@ main {
 
 /* CONTAINER */
 .container-flex-publi {
-    background-color: var(--cor-branco);
     width: 90%;
     max-width: 900px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    border: var(--borda);
-    border-radius: var(--borda-arredondamento);
-    padding: 10px;
+
 }
 
 /* STORYS */
@@ -27,8 +24,8 @@ main {
     gap: 20px;
     padding: 10px;
     overflow-x: scroll;
-    background-color: var(--cor-cinza);
-    border-radius: var(--borda-arredondamento);
+
+
 }
 
 #storys::-webkit-scrollbar {
@@ -50,7 +47,6 @@ main {
     height: 80px;
     object-fit: cover;
     object-position: center;
-    border: 2px solid var(--cor-verde);
 }
 
 .card-story>a>span {
@@ -85,8 +81,7 @@ main {
     padding: 10px;
     color: var(--cor-cinza-escuro);
     font-size: var(--tamanho-fonte-sm);
-    border: var(--borda);
-    border-radius: var(--borda-arredondamento);
+
 }
 
 #cadastro-publi>form>textarea::placeholder {
@@ -111,7 +106,7 @@ main {
     padding: 10px;
     font-weight: bold;
     cursor: pointer;
-    border-radius: var(--borda-arredondamento);
+
 }
 
 .formulario-botao-azul:hover {
@@ -120,7 +115,7 @@ main {
 
 /* SEÇÃO PUBLICAÇÕES */
 #publicacoes {
-    background-color: var(--cor-cinza);
+
     width: 100%;
     min-height: 600px;
     border-radius: var(--borda-arredondamento);
@@ -149,9 +144,8 @@ main {
 
 .card-publi>figure {
     width: 100%;
-    background-color: var(--cor-marrom-claro);
-    border-radius: var(--borda-arredondamento);
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .imagem-publicacao {
@@ -170,6 +164,7 @@ main {
     margin: 0 3%;
     color: var(--cor-cinza-escuro);
     order: 2;
+    flex-wrap: wrap;
 }
 
 .descricao-publicacao>p {
@@ -178,16 +173,23 @@ main {
     color: var(--cor-cinza-escuro);
 }
 
+.interacoes-publicacao {
+
+    width: 87px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    order: 1;
+    margin: 15px 3%;
+}
+
 .interacoes-publicacao>button {
     border: none;
     background-color: transparent;
     cursor: pointer;
 }
 
-.interacoes-publicacao>button>img {
-
-    
-}
+.interacoes-publicacao>button>img {}
 
 .interacoes-publicacao>button>span {
     font-size: var(--tamanho-fonte-sm);
@@ -195,6 +197,14 @@ main {
     color: var(--cor-verde)
 }
 
-.card-publi>button{
+.card-publi>button {
     margin: 15PX 3%;
+    background-color: transparent;
+    border: none;
+
+    font-size:var(--cor-marrom-claro) ;
+    font-weight: 400;
+    color: var(--cor-cinza-escuro);
+
+    cursor: pointer;
 }
