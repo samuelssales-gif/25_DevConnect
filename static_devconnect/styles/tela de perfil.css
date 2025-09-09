@@ -2,7 +2,7 @@ main {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    justify-content: center;
 }
 
 /* Container principal */
@@ -16,7 +16,6 @@ main {
 
 /* Header */
 header {
-    border-bottom: 1px solid var(--cor-cinza);
     padding-bottom: 10px;
     margin-bottom: 20px;
     background-color: var(--cor-cinza);
@@ -29,7 +28,7 @@ header {
 }
 
 .header-nav img {
-    height: 40px;
+    max-height: 40px;
 }
 
 .cabecalho-acoes a {
@@ -49,14 +48,15 @@ header {
     margin-bottom: 20px;
     background-color: var(--cor-cinza-escuro);
     padding: 15px;
-    border-radius: 10px;
+    flex-wrap: wrap;
+
 }
 
 .profile-pic {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
     margin-right: 20px;
+    border-radius: 50%;
 }
 
 .informacao-perfil h2 {
@@ -81,7 +81,6 @@ header {
     padding: 5px 10px;
     margin-right: 10px;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     color: white;
 }
@@ -124,20 +123,20 @@ header {
     margin-bottom: 15px;
     background-color: var(--cor-cinza);
     padding: 10px;
-    border-radius: 10px;
 }
 
 .comentario .perfil {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+   
 }
 
 .comentario .perfil img {
     width: 35px;
     height: 35px;
-    border-radius: 50%;
     margin-right: 10px;
+    border-radius: 50%;
 }
 
 .comentario .perfil .nome {
