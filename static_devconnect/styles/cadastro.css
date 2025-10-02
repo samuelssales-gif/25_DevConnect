@@ -32,7 +32,6 @@ main > div {
 
 #formulario > div > label {
     font-size: var(--tamanho-fonte-sm);
-    color: var(--cor-marrom-claro);
     font-weight: 500;
     padding-bottom: 4px;
 }
