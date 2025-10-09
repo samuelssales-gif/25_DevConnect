@@ -1,13 +1,67 @@
---DQL
-CREATE LOGIN samuel WITH PASSWORD = '123';
+﻿
+SELECT 
+      seguir.nome_usuario AS nome_seguidor,
+      seguida.nome_usuario AS nome_seguida
+FROM tb_seguidor S
+INNER JOIN tb_usuario seguir ON S.id_usuario_seguir = seguir.id
+INNER JOIN tb_usuario seguida ON S.id_usuario_seguida = seguida.id;
+GO
 
-CREATE USER samuel FOR LOGIN samuel;
 
-DENY INSERT, UPDATE, DELETE 
-TO samuel;
+SELECT 
+      U.nome_usuario,
+      COUNT(S.id_usuario_seguir) AS qtd_seguidores
+FROM tb_seguidor S
+INNER JOIN tb_usuario U ON S.id_usuario_seguida = U.id
+GROUP BY U.nome_usuario;
+GO
 
-CREATE TABLE Usuario(
-id INT not null
-);
 
-SELECT * fROM Usuario
+SELECT 
+       U.nome_usuario,
+       P.descricao,
+       P.imagem_url
+FROM tb_publicacao P
+INNER JOIN tb_usuario U ON P.id_usuario = U.id;
+GO
+
+
+SELECT 
+        U.nome_usuario AS comentador,
+        C.texto,
+        P.imagem_url,
+        Pub.nome_usuario AS nome_publicador
+FROM tb_comentario C
+INNER JOIN tb_usuario U ON C.id_usuario = U.id
+INNER JOIN tb_publicacao P ON C.id_publicacao = P.id
+INNER JOIN tb_usuario Pub ON P.id_usuario = Pub.id;
+GO
+
+
+SELECT 
+         U.nome_usuario AS publicador,
+         P.imagem_url,
+         COUNT(Cur.id_usuario) AS qnt_curtidas
+FROM tb_curtida Cur
+INNER JOIN tb_publicacao P ON Cur.id_publicacao = P.id
+INNER JOIN tb_usuario U ON P.id_usuario = U.id
+GROUP BY P.imagem_url, U.nome_usuario;
+GO
+
+
+SELECT 
+	   U.nome_usuario, 
+	   P.id AS Publicacoes
+FROM tb_usuario U
+LEFT JOIN tb_publicacao P ON P.id_usuario = U.id
+WHERE P.id IS NULL;
+GO
+
+
+SELECT 
+  	   U.nome_usuario, 
+	   Cur.id AS Curtidas
+FROM tb_usuario U
+LEFT JOIN tb_curtida Cur ON Cur.id_usuario = U.id
+WHERE Cur.id IS NULL;
+GO
